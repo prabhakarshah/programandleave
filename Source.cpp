@@ -30,6 +30,28 @@ void moveNode(Node* &src, Node* &dest){
 	dest->next = temp;
 	dest = temp;
 }
+//Merge two lists given in sorted order
+Node* mergeList(Node* &list1, Node* &list2){
+	Node dummy(0);
+	Node* outList = &dummy;
+	while (true){
+		if (list1 == nullptr){
+			outList->next = list2;
+			break;
+		}
+		if (list2 == nullptr){
+			outList->next = list1;
+		}
+
+		if (list1->data <= list2->data){
+			moveNode(outList->next, list1);
+		}
+		else
+			moveNode(outList->next, list2);
+
+		outList = outList->next;
+	}
+}
 
 int main(){
 
