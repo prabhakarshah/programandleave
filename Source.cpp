@@ -10,7 +10,7 @@ struct Node{
 	}
 };
 
-void push(Node* &head, int data){
+void pushNode(Node* &head, int data){
 	Node* newNode = new Node(data);
 	newNode->next = head;
 	head = newNode;
@@ -51,9 +51,24 @@ Node* mergeList(Node* &list1, Node* &list2){
 
 		outList = outList->next;
 	}
+	return outList;
+}
+
+Node* makeList(){
+	Node *head;
+	pushNode(head, 1);
+	pushNode(head, 2);
+	pushNode(head, 3);
+	pushNode(head, 4);
+	pushNode(head, 5);
+	pushNode(head, 7);
+
+	return head;
 }
 
 int main(){
-
+	Node* head = makeList();
+	print(head);
+	return 0;
 
 }
