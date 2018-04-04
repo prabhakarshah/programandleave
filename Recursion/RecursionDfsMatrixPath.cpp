@@ -30,7 +30,7 @@ void find_max_region_length(const vvi &matrix, vvb &visited, int localmax, int &
 	{
 		if (isInside(i+r, j+c, matrix.size(), matrix[0].size()) 
 			&& matrix[i + r][j + c]>0
-			&& visited[i + r][j + c] != false 
+			&& visited[i + r][j + c] == false 
 			)
 		{
 			std::cout << "At [" << i << ", " << j << "]\n";
