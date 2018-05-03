@@ -1,0 +1,120 @@
+// C++ program to print inorder traversal of a Binary Search
+// Tree (BST) without recursion and stack
+#include <bits/stdc++.h>
+using namespace std;
+
+// BST Node
+struct Node
+{
+	Node *left, *right, *parent;
+	int key;
+};
+
+// A utility function to create a new BST node
+Node *newNode(int item)
+{
+	Node *temp = new Node;
+	temp->key = item;
+	temp->parent = temp->left = temp->right = NULL;
+	return temp;
+}
+
+
+
+void inorder(Node* temp){
+    if(temp){
+        inorder(temp->left);
+        cout<<temp->key<<" ";
+        inorder(temp->right);
+    }
+    
+}
+/* A utility function to insert a new node with
+given key in BST */
+Node *insert(Node *node, int key)
+{
+	/* If the tree is empty, return a new node */
+	if (node == NULL) return newNode(key);
+
+	/* Otherwise, recur down the tree */
+	if (key < node->key)
+	{
+		node->left = insert(node->left, key);
+		node->left->parent = node;
+	}
+	else if (key > node->key)
+	{
+		node->right = insert(node->right, key);
+		node->right->parent = node;
+	}
+
+	/* return the (unchanged) node pointer */
+	return node;
+}
+
+// Function to print inorder traversal using parent
+// pointer
+void inorder1(Node *root)
+{
+	if(!root)
+	    return;
+	
+	Node* parent =root;
+	Node* child  =nullptr;
+
+	// Start traversal from root
+	while (1)
+	{
+		while (parent->left != child)
+		{
+				parent = parent->left;
+		}
+
+		// Print root's data
+		printf("%d ", parent->key);
+
+		// Mark left as done
+		// If right child exists
+		if(parent->right){
+		    parent = parent->right;
+		    child = nullptr;
+		}
+		else{
+		    child = parent;
+		    parent = child->parent;
+		    while(parent && parent->right == child){
+		        child = parent;
+		        parent = child->parent;
+		    }
+		    if(!parent)
+		        break;
+		        
+		}
+	}
+}
+
+int main(void)
+{
+	Node * root = NULL;
+
+	root = insert(root, 24);
+	root = insert(root, 27);
+	root = insert(root, 29);
+	root = insert(root, 34);
+	root = insert(root, 14);
+	root = insert(root, 4);
+	root = insert(root, 10);
+	root = insert(root, 22);
+	root = insert(root, 13);
+	root = insert(root, 3);
+	root = insert(root, 2);
+	root = insert(root, 6);
+
+	printf("Inorder traversal is \n");
+	
+	inorder(root);
+	cout<<endl;
+	inorder1(root);
+
+	return 0;
+}
