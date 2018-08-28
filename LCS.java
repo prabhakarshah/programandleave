@@ -25,12 +25,11 @@ public class LCS {
                 if (s.charAt(i) == t.charAt(j))
                     L[i + 1][j + 1] = L[i][j];
                 else {
-                    List<Integer> integers = new ArrayList<>(Arrays.asList(
+                    L[i + 1][j + 1] = 1 + Collections.min(new ArrayList<>(Arrays.asList(
                             L[i][j],
                             L[i][j + 1],
                             L[i + 1][j]
-                    ));
-                    L[i + 1][j + 1] = Collections.min(integers) + 1;
+                    )));
                 }
             }
         }
